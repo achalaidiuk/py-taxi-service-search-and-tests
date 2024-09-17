@@ -34,7 +34,6 @@ class TestDriverForms(TestCase):
         form = DriverCreationForm(data)
         self.assertTrue(form.is_valid())
 
-
     def test_driver_license_update_form_invalid_license_number(self):
         data = {"license_number": "1234ABC"}
         form = DriverLicenseUpdateForm(data)

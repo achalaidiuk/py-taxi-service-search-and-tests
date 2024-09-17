@@ -9,7 +9,9 @@ URL_CAR_LIST = "taxi:car-list"
 
 class TestCarListSearchView(TestCase):
     def setUp(self):
-        self.manufacturer = Manufacturer.objects.create(name="Test Manufacturer")
+        self.manufacturer = (
+            Manufacturer.objects.create(name="Test Manufacturer")
+        )
 
         Car.objects.create(model="Mercedes", manufacturer=self.manufacturer)
         Car.objects.create(model="Toyota", manufacturer=self.manufacturer)
@@ -26,7 +28,9 @@ class TestCarListSearchView(TestCase):
             )
 
     def test_car_list_search_without_results(self) -> None:
-        response = self.client.get(reverse(URL_CAR_LIST) + "?model=Nonexistent Car")
+        response = (
+            self.client.get(reverse(URL_CAR_LIST) + "?model=Nonexistent Car")
+        )
 
         if response.context:
             self.assertIn("car_list", response.context)
@@ -39,7 +43,9 @@ class TestDriverListSearchView(TestCase):
         Driver.objects.create(username="testdriver2", license_number="67890")
 
     def test_driver_list_search(self) -> None:
-        response = self.client.get(reverse(URL_DRIVER_LIST) + "?username=testdriver1")
+        response = (
+            self.client.get(reverse(URL_DRIVER_LIST) + "?username=testdriver1")
+        )
 
         if response.context:
             self.assertIn("driver_list", response.context)
@@ -50,7 +56,9 @@ class TestDriverListSearchView(TestCase):
             )
 
     def test_driver_list_search_without_results(self) -> None:
-        response = self.client.get(reverse(URL_DRIVER_LIST) + "?username=nonexistentdriver")
+        response = (
+            self.client.get(reverse(URL_DRIVER_LIST) + "?username=none_driver")
+        )
 
         if response.context:
             self.assertIn("driver_list", response.context)

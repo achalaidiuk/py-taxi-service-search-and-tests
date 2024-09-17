@@ -6,6 +6,7 @@ from taxi.models import Car, Manufacturer
 URL_MANUFACTURER_LIST = "taxi:manufacturer-list"
 URL_CAR_LIST = "taxi:car-list"
 
+
 class TaxiViewsTest(TestCase):
     def setUp(self):
         self.user = get_user_model().objects.create_user(
@@ -36,7 +37,9 @@ class TaxiViewsTest(TestCase):
             )
 
     def test_car_list_search_nonexisting_value(self):
-        response = self.client.get(reverse(URL_CAR_LIST) + "?model=nonexistent")
+        response = (
+            self.client.get(reverse(URL_CAR_LIST) + "?model=nonexistent")
+        )
 
         if response.context:
             self.assertIn("car_list", response.context)
